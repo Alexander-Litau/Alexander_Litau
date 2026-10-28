@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#f2f2f2">
+<meta name="color-scheme" content="light">
+<title>Александр Литау</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='34' fill='%23ffffff' dominant-baseline='middle'%3EЛ%3C/text%3E%3C/svg%3E">
+<script src="https://st.max.ru/js/max-web-app.js"></script>
+<script>
+if (!window.WebApp) {
+  var s = document.createElement('script');
+  s.src = 'https://telegram.org/js/telegram-web-app.js';
+  document.head.appendChild(s);
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { overflow-x: hidden; }
+
+:root {
+  --bg: #f2f2f2;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --surface-3: #f7f7f7;
+  --text: #0a0a0a;
+  --text-muted: #6b6b70;
+  --text-soft: #9c9c9f;
+  --border: #ececec;
+  --verified: #2196f3;
+  --accent-tv: #c9302c;
+  --accent-radio: #1d4ed8;
+  --accent-digital: #0a0a0a;
+  --accent-events: #a16207;
+  --radius: 22px;
+  --radius-md: 14px;
+  --radius-sm: 11px;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  min-height: 100vh;
+  padding-bottom: 110px;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 12px;
+  position: relative;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(242,242,242,0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 90;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 4px;
+  margin-bottom: 4px;
+}
+.header-name {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.header-actions { display: flex; gap: 8px; }
+.header-btn {
+  width: 38px; height: 38px;
+  background: #fff;
+  border-radius: 11px;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  color: var(--text);
+}
+.header-btn svg { width: 18px; height: 18px; }
+
+/* ===== VERIFIED BADGE (Telegram-style sunburst) ===== */
+.verified {
+  width: 19px; height: 19px;
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%232AABEE' d='M12 .6l1.95 1.55 2.4-.78 1.05 2.27 2.5.36-.06 2.52 2.31 1.02-1.13 2.26L23 12l-1.98 2.2 1.13 2.26-2.31 1.02.06 2.52-2.5.36-1.05 2.27-2.4-.78L12 23.4l-1.95-1.55-2.4.78-1.05-2.27-2.5-.36.06-2.52L1.85 16.46 2.98 14.2 1 12l1.98-2.2L1.85 7.54l2.31-1.02-.06-2.52 2.5-.36 1.05-2.27 2.4.78L12 .6z'/><path fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M7.5 12.2l3 3 6-6.4'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.verified-sm { width: 14px; height: 14px; }
+.verified-lg { width: 26px; height: 26px; margin-left: 4px; }
+
+/* ===== CARD ===== */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.card-tight { padding: 22px 24px; }
+.card-overflow { overflow: hidden; padding: 0; }
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.card-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+.card-icon.tv { background: var(--accent-tv); }
+.card-icon.radio { background: var(--accent-radio); }
+.card-icon.digital { background: linear-gradient(135deg,#0a0a0a,#3a3a3a); }
+.card-icon.events { background: var(--accent-events); }
+.card-icon.profile { background: #0a0a0a; padding: 2px; overflow: hidden; }
+.card-icon.profile img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.card-icon.contact { background: #0a0a0a; }
+
+.card-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ===== TEXTS ===== */
+.lead-headline {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 18px;
+}
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 18px 4px 10px;
+}
+.card-text {
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.card-text + .card-text { margin-top: 14px; }
+.card-text strong { color: var(--text); font-weight: 700; }
+
+/* ===== BUTTONS ===== */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border-radius: 13px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: #0a0a0a; color: #fff; }
+.btn-secondary { background: var(--bg); color: var(--text); }
+.btn-go {
+  background: #0a0a0a;
+  color: #fff;
+  position: absolute;
+  top: 22px; right: 22px;
+  padding: 9px 14px;
+  font-size: 13px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  z-index: 2;
+}
+
+/* ===== HERO PHOTO ===== */
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: #0a0a0a;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 12px;
+  position: relative;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== CHIPS ===== */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+}
+.chip {
+  background: var(--surface-2);
+  border-radius: 100px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1c1c1e;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s ease;
+}
+.chip:active { transform: scale(0.96); }
+
+/* ===== USEFUL (Кому я полезен) ===== */
+.useful-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.useful-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface-2);
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  transition: transform 0.15s ease, background 0.2s ease;
+  color: var(--text);
+}
+.useful-row:active { transform: scale(0.98); }
+.useful-row:hover { background: #ececee; }
+.useful-emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+  line-height: 1;
+}
+.useful-text { flex: 1; min-width: 0; }
+.useful-situation {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+.useful-action {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.useful-arrow {
+  color: var(--text-soft);
+  font-size: 18px;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+/* ===== STATS ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 18px;
+}
+.stat-cell {
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 14px 10px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 6px;
+  letter-spacing: -0.005em;
+}
+.stats-hero {
+  gap: 8px;
+  margin-top: 0;
+}
+.stats-hero .stat-cell {
+  padding: 22px 6px;
+}
+.stats-hero .stat-num {
+  font-size: 32px;
+}
+.stats-hero .stat-label {
+  font-size: 11.5px;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+/* ===== MEDIA CARD ===== */
+.media-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  background: #0a0a0a;
+}
+.media-card-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  display: block;
+  object-fit: cover;
+}
+.media-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 22px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+  color: #fff;
+}
+.media-card-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 8px;
+}
+.media-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+/* ===== LIST ===== */
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.list-item:last-child { border-bottom: none; padding-bottom: 0; }
+.list-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-soft);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  padding-top: 2px;
+  width: 22px;
+}
+.list-content { flex: 1; min-width: 0; }
+.list-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.015em;
+  margin-bottom: 2px;
+}
+.list-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ===== LOGO CARDS (Вести-Иркутск + MCM на странице "В эфире") ===== */
+.logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.logo-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 5 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== CONTACT BUTTONS ===== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 18px;
+}
+.contact-btn {
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+.contact-btn:active { transform: scale(0.97); }
+.contact-btn * { pointer-events: none; }
+.contact-btn.primary { background: #0a0a0a; color: #fff; }
+.contact-btn-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: -0.005em;
+}
+.contact-btn.primary .contact-btn-label { color: rgba(255,255,255,0.6); }
+.contact-btn-value {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 4px;
+  letter-spacing: -0.015em;
+}
+
+.email-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-top: 8px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s ease;
+}
+.email-link:active { transform: scale(0.98); }
+.email-link-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: -0.005em;
+}
+.email-link-value {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.info-row + .info-row { border-top: 1px solid var(--border); }
+.info-row-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  line-height: 1;
+}
+
+.bridge {
+  text-align: center;
+  padding: 18px 12px 8px;
+  margin-bottom: 12px;
+}
+.bridge-text {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 14px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bridge-arrow {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  animation: bridge-bounce 1.6s ease-in-out infinite;
+}
+@keyframes bridge-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* ===== LIVE BADGE ===== */
+.live-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+.live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  position: relative;
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+.live-dot-inline {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ef4444;
+  vertical-align: baseline;
+  margin-left: 12px;
+  margin-bottom: 2.5px;
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.55); }
+  50% { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+}
+.live-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+.live-text span { color: var(--text-muted); font-weight: 500; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-soft);
+  padding: 22px 0 6px;
+  letter-spacing: -0.005em;
+}
+.footer strong { color: #4a4a4d; font-weight: 600; }
+
+/* ===== TAB BAR SHELF (сплошной серый от низа до середины таб-бара) ===== */
+.tab-bar-shelf {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* высота = pill bottom (14px) + половина высоты пилюли (~35px) = середина таб-бара */
+  height: calc(49px + env(safe-area-inset-bottom, 8px));
+  pointer-events: none;
+  z-index: 90;
+  background: var(--bg);
+}
+
+/* ===== TAB BAR ===== */
+.tab-bar {
+  position: fixed;
+  bottom: calc(14px + env(safe-area-inset-bottom, 8px));
+  left: 12px;
+  right: 12px;
+  max-width: 456px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  display: flex;
+  z-index: 100;
+  padding: 5px;
+  border-radius: 60px;
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 4px 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: none;
+  font-family: inherit;
+  position: relative;
+  border-radius: 50px;
+  min-width: 0;
+}
+.tab-item .tab-icon {
+  width: 40px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  transition: all 0.25s;
+}
+.tab-item .tab-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: -0.01em;
+  transition: color 0.25s;
+  white-space: nowrap;
+}
+.tab-item.active .tab-icon {
+  background: rgba(10,10,10,0.06);
+}
+.tab-item.active .tab-label {
+  color: var(--text);
+}
+
+/* ===== PAGES ===== */
+.page { display: none; animation: fade-in 0.25s ease; }
+.page.active { display: block; }
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tablet/desktop: пусть выглядит как «телефон в центре» */
+@media (min-width: 600px) {
+  body { background: #e8e8e8; }
+}
+
+/* ===== DALI AUTO ===== */
+.dali-hero { padding: 0; overflow: hidden; }
+.dali-brand { background: #b7131b; overflow: hidden; }
+.dali-brand img { display: block; width: 112%; max-width: none; height: auto; margin: -7.6% -6% -11.4%; }
+.dali-intro { padding: 26px 24px; }
+.dali-eyebrow { color: #b7131b; font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 12px; }
+.dali-headline { font-size: 33px; line-height: 1.12; letter-spacing: -.035em; font-weight: 800; margin-bottom: 16px; }
+.dali-button { background: #b7131b; color: #fff; width: 100%; margin-top: 20px; }
+.dali-button:hover { background: #981017; }
+.dali-gallery { padding: 0 16px 20px; }
+.dali-feature { width: 100%; display: block; padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: #e8e9ec; cursor: zoom-in; }
+.dali-feature img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; }
+.dali-photo-meta { display: flex; justify-content: space-between; gap: 12px; padding: 12px 2px; font-size: 12px; color: var(--text-muted); }
+.dali-photo-meta strong { color: var(--text); font-weight: 700; }
+.dali-thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.dali-thumb { padding: 3px; border: 2px solid transparent; border-radius: 10px; background: var(--surface-2); cursor: pointer; opacity: .65; }
+.dali-thumb[aria-pressed="true"] { border-color: #b7131b; opacity: 1; }
+.dali-thumb img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 5px; }
+.dali-thumb:focus-visible, .dali-feature:focus-visible { outline: 3px solid #b7131b; outline-offset: 3px; }
+.dali-gallery-head { padding: 24px 24px 16px; }
+.dali-gallery-head h3, .dali-title { font-size: 23px; line-height: 1.2; letter-spacing: -.025em; font-weight: 800; margin-bottom: 10px; }
+.dali-gallery-head p { font-size: 17px; line-height: 1.5; color: var(--text-muted); }
+.dali-step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 17px 0; border-bottom: 1px solid var(--border); }
+.dali-step:last-child { border-bottom: 0; padding-bottom: 0; }
+.dali-step span { color: #b7131b; font-weight: 800; font-size: 13px; padding-top: 3px; }
+.dali-step h4 { font-size: 16px; margin-bottom: 4px; }
+.dali-step p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+.dali-note { background: #fff5f3; }
+.dali-viewer { border: 0; padding: 0; border-radius: 18px; background: #171717; max-width: calc(100vw - 24px); max-height: 90vh; margin: auto; }
+.dali-viewer::backdrop { background: rgba(0,0,0,.8); }
+.dali-viewer img { display: block; max-width: 100%; max-height: 80vh; object-fit: contain; }
+.dali-viewer button { display: block; background: #fff; color: #111; border: 0; width: 100%; padding: 14px; font: inherit; cursor: pointer; }
+@media (max-width: 360px) { .dali-headline { font-size: 29px; } }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <div class="header-name">Александр Литау<span class="verified"></span></div>
+  </div>
+
+  <!-- ============== PAGE: ГЛАВНАЯ ============== -->
+  <div class="page active" id="pageHome">
+
+    <div class="card">
+      <h1 class="lead-headline" style="font-size:26px;letter-spacing:-0.03em;margin-bottom:18px;">Если коротко:</h1>
+      <div class="stats stats-hero">
+        <div class="stat-cell">
+          <div class="stat-num">9</div>
+          <div class="stat-label">лет в кадре</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">2000+</div>
+          <div class="stat-label">эфиров</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">80+</div>
+          <div class="stat-label">мероприятий</div>
+        </div>
+      </div>
+      <p class="card-text" style="margin-top:18px;">Ведущий <strong>«Вести-Иркутск»</strong>, новостей на радио <strong>«MCM»</strong>, основатель компании автоимпорта <strong>«ДАЛИ АВТО»</strong>. Веду деловые конференции, концерты и официальные мероприятия.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="switchTabByName('pageContacts')">Сотрудничество</button>
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img class="media-card-img" src="photos/IMG_2796.jpg" alt="Александр Литау в студии Вести-Иркутск" loading="lazy">
+      <div class="media-card-overlay">
+        <div class="media-card-tag">01 / TV</div>
+        <div class="media-card-title">Вести-Иркутск</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon contact">→</div>
+        <div class="card-title">Кому я полезен</div>
+      </div>
+      <p class="card-text" style="margin-bottom:18px;">Если ваша задача попадает в одну из ситуаций ниже — мы найдём общий язык.</p>
+      <div class="useful-list">
+        <button class="useful-row" onclick="switchTabByName('pageStage')">
+          <div class="useful-emoji">📅</div>
+          <div class="useful-text">
+            <div class="useful-situation">У вас деловое событие</div>
+            <div class="useful-action">Веду конференции, форумы, официальные церемонии и концерты</div>
+          </div>
+          <div class="useful-arrow">→</div>
+        </button>
+        <button class="useful-row" onclick="switchTabByName('pageAgency')">
+          <div class="useful-emoji">📈</div>
+          <div class="useful-text">
+            <div class="useful-situation">Планируете купить автомобиль</div>
+            <div class="useful-action">ДАЛИ АВТО — автомобили из Китая и Японии под заказ</div>
+          </div>
+          <div class="useful-arrow">→</div>
+        </button>
+        <button class="useful-row" onclick="switchTabByName('pageBroadcast')">
+          <div class="useful-emoji">📢</div>
+          <div class="useful-text">
+            <div class="useful-situation">Нужно медиасопровождение</div>
+            <div class="useful-action">Эфиры, интервью, PR</div>
+          </div>
+          <div class="useful-arrow">→</div>
+        </button>
+        <button class="useful-row" onclick="switchTabByName('pageBroadcast')">
+          <div class="useful-emoji">🎬</div>
+          <div class="useful-text">
+            <div class="useful-situation">Хотите авторский телепроект</div>
+            <div class="useful-action">Идея, сценарий, ведение под задачу заказчика</div>
+          </div>
+          <div class="useful-arrow">→</div>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============== PAGE: В ЭФИРЕ ============== -->
+  <div class="page" id="pageBroadcast">
+
+    <div class="card card-tight">
+      <h2 class="lead-headline" style="font-size:30px;margin-bottom:6px;">В эфире<span class="live-dot-inline"></span></h2>
+      <p class="card-text">ТВ и радио. Главные информационные программы Иркутской области.</p>
+      <div class="info-row" style="margin-top:14px;">
+        <span class="info-row-icon">📺</span>
+        <span class="info-row-text">Вести-Иркутск · 21:05</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">🎙</span>
+        <span class="info-row-text">Новости на MCM · с 7:30, каждые полчаса</span>
+      </div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-card"><img src="photos/logo-vesti.jpg" alt="Вести-Иркутск"></div>
+      <div class="logo-card"><img src="photos/logo-mcm.jpg" alt="MCM"></div>
+    </div>
+
+    <div class="bridge">
+      <p class="bridge-text">Это ☝️ моя работа. А вот что мы с командой делаем для бизнеса</p>
+      <span class="bridge-arrow">↓</span>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon tv">🎬</div>
+        <div class="card-title">Авторский телепроект</div>
+      </div>
+      <p class="card-text">Под вашу задачу. Полный цикл: концепция, продакшн, ведение, эфир.</p>
+      <div class="list">
+        <div class="list-item">
+          <div class="list-num">01</div>
+          <div class="list-content">
+            <div class="list-title">Идея и формат</div>
+            <div class="list-desc">Концепция под задачу, целевую аудиторию</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">02</div>
+          <div class="list-content">
+            <div class="list-title">Сценарий и съёмочный план</div>
+            <div class="list-desc">Структура выпусков, тайминг, локации</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">03</div>
+          <div class="list-content">
+            <div class="list-title">Производство</div>
+            <div class="list-desc">Съёмки, монтаж, графика, ведение</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">04</div>
+          <div class="list-content">
+            <div class="list-title">Эфир и продвижение</div>
+            <div class="list-desc">Размещение, нарезки для соцсетей, посевы</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon radio">📰</div>
+        <div class="card-title">Размещение в СМИ</div>
+      </div>
+      <p class="card-text">Личность, бренд, событие — выводим в публичное поле.</p>
+      <div class="list">
+        <div class="list-item">
+          <div class="list-num">01</div>
+          <div class="list-content">
+            <div class="list-title">Подбираем формат</div>
+            <div class="list-desc">Интервью, репортаж, публикация или гостевой эфир — под вашу задачу.</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">02</div>
+          <div class="list-content">
+            <div class="list-title">Готовим материал</div>
+            <div class="list-desc">Определяем тему, расставляем акценты, готовим текст или вопросы для эфира.</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">03</div>
+          <div class="list-content">
+            <div class="list-title">Организуем размещение</div>
+            <div class="list-desc">ТВ, радио, онлайн-медиа и печатные издания.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="lead-headline" style="font-size:24px;margin-bottom:6px;">Запустим проект?</h2>
+      <p class="card-text">Напишите — обсудим задачу, формат и условия.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="switchTabByName('pageContacts')">Обсудить задачу</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============== PAGE: СЦЕНА ============== -->
+  <div class="page" id="pageStage">
+
+    <div class="card card-tight">
+      <h2 class="lead-headline" style="font-size:30px;margin-bottom:6px;">Сцена</h2>
+      <p class="card-text">Деловые форматы и большие концертные площадки. 14 лет на публике.</p>
+    </div>
+
+    <div class="media-card">
+      <img class="media-card-img" src="photos/stage-concert.webp" alt="Александр Литау на фестивале «Музыка моего города МСМ»" loading="lazy">
+      <div class="media-card-overlay">
+        <div class="media-card-tag">02 / Фестиваль</div>
+        <div class="media-card-title">Музыка моего города МСМ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon events">→</div>
+        <div class="card-title">Что веду</div>
+      </div>
+      <div class="list">
+        <div class="list-item">
+          <div class="list-num">01</div>
+          <div class="list-content">
+            <div class="list-title">Деловые мероприятия</div>
+            <div class="list-desc">Конференции, экономические форумы, бизнес-завтраки, презентации, панельные дискуссии, стратегические сессии. Работа с официальными лицами, интервьюирование спикеров</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">02</div>
+          <div class="list-content">
+            <div class="list-title">Корпоративные события</div>
+            <div class="list-desc">Юбилеи предприятий, церемонии награждения сотрудников, профессиональные праздники, открытия филиалов</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">03</div>
+          <div class="list-content">
+            <div class="list-title">Официальные и публичные события</div>
+            <div class="list-desc">Городские мероприятия, торжественные церемонии, премии, спортивные события</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-num">04</div>
+          <div class="list-content">
+            <div class="list-title">Концерты и развлекательные мероприятия</div>
+            <div class="list-desc">Фестивали, концерты, массовые праздники</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img class="media-card-img" src="photos/stage-ceremony.webp" alt="Александр Литау с соведущей на концерте День «РЖД»" loading="lazy">
+      <div class="media-card-overlay">
+        <div class="media-card-tag">03 / Концерт</div>
+        <div class="media-card-title">День «РЖД»</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-text"><strong>Свадьбы, выпускные и корпоративы — не моя история.</strong></p>
+      <p class="card-text">Если вашему событию нужна профессиональная подача, точный тайминг и спокойствие на сцене — поговорим.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="switchTabByName('pageContacts')">Обсудить мероприятие</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============== PAGE: МОЙ БИЗНЕС ============== -->
+  <div class="page" id="pageAgency">
+    <div class="card dali-hero">
+      <div class="dali-brand"><img src="photos/dali/logo-great-wall.png" alt="ДАЛИ АВТО — автомобили из Китая и Японии" width="1562" height="1007"></div>
+      <div class="dali-intro">
+        <p class="dali-eyebrow">Китай / Япония → Россия</p>
+        <h2 class="dali-headline">Ваш автомобиль.<br>Под заказ.</h2>
+        <p class="card-text">Автомобили из Китая и Японии: подбор, проверка, покупка и доставка в Россию.</p>
+        <a class="btn dali-button" href="tg.html">Обсудить подбор ↗</a>
+      </div>
+    </div>
+    <div class="card card-tight">
+      <h3 class="dali-title">Знакомьтесь: ДАЛИ АВТО</h3>
+      <p class="card-text">Здесь — ещё одно направление моей работы: импорт автомобилей. Если присматриваете машину для себя или семьи, напишите мне — начнём с ваших пожеланий и бюджета.</p>
+    </div>
+    <div class="card card-overflow">
+      <div class="dali-gallery-head"><h3>На площадке</h3><p>Несколько автомобилей с нашей площадки в Хуньчуне. Для каждой машины есть подробный видеообзор — можно рассмотреть её со всех сторон и заглянуть в салон.</p></div>
+      <div class="dali-gallery" aria-label="Фотографии автомобилей со склада">
+        <button class="dali-feature" type="button" onclick="openDaliPhoto(this)" aria-label="Увеличить выбранное фото"><img id="daliSelectedPhoto" src="photos/dali/audi-suv.webp" alt="Audi Q3" width="1000" height="1000" loading="lazy"></button>
+        <div class="dali-photo-meta" aria-live="polite"><strong id="daliPhotoCaption">Audi Q3</strong><span id="daliPhotoCount">01 / 04</span></div>
+        <div class="dali-thumbs"><button class="dali-thumb" type="button" aria-label="Показать фото 1: Audi Q3" aria-pressed="true" onclick="selectDaliPhoto(this, 1)"><img src="photos/dali/audi-suv.webp" alt="Audi Q3" loading="lazy" width="160" height="160"></button><button class="dali-thumb" type="button" aria-label="Показать фото 2: Changan Qiyuan A03R" aria-pressed="false" onclick="selectDaliPhoto(this, 2)"><img src="photos/dali/sedan-centered.webp" alt="Changan Qiyuan A03R" loading="lazy" width="160" height="160"></button><button class="dali-thumb" type="button" aria-label="Показать фото 3: Mazda CX-5" aria-pressed="false" onclick="selectDaliPhoto(this, 3)"><img src="photos/dali/mazda.webp" alt="Mazda CX-5" loading="lazy" width="160" height="160"></button><button class="dali-thumb" type="button" aria-label="Показать фото 4: Audi A3L" aria-pressed="false" onclick="selectDaliPhoto(this, 4)"><img src="photos/dali/audi-sedan-centered.webp" alt="Audi A3L" loading="lazy" width="160" height="160"></button></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="dali-title">Как проходит заказ</h3>
+      <div class="dali-step"><span>01</span><div><h4>Запрос</h4><p>Обсуждаем модель, бюджет и пожелания к автомобилю.</p></div></div><div class="dali-step"><span>02</span><div><h4>Подбор и проверка</h4><p>Подбираем подходящие варианты и проводим комплексную проверку состояния автомобиля.</p></div></div><div class="dali-step"><span>03</span><div><h4>Покупка</h4><p>Согласовываем выбранный автомобиль и условия покупки.</p></div></div><div class="dali-step"><span>04</span><div><h4>Доставка</h4><p>Организуем отправку автомобиля в Россию.</p></div></div><div class="dali-step"><span>05</span><div><h4>Выдача авто</h4><p>Передаём вам автомобиль и документы.</p></div></div>
+    </div>
+    <div class="card dali-note">
+      <h3 class="dali-title">Какой автомобиль ищете?</h3>
+      <p class="card-text">Напишите модель, примерный бюджет и город доставки. Если ещё выбираете — расскажите, для чего нужна машина и что для вас важно.</p>
+      <a class="btn dali-button" href="tg.html">Написать по поводу авто ↗</a>
+      <a class="btn btn-secondary" style="width:100%;margin-top:8px;" href="max.html">Мне удобнее в MAX ↗</a>
+    </div>
+  </div>
+
+  <!-- ============== PAGE: КОНТАКТЫ ============== -->
+  <div class="page" id="pageContacts">
+
+    <div class="card card-tight">
+      <h2 class="lead-headline" style="font-size:30px;margin-bottom:6px;">Контакты</h2>
+      <p class="card-text">Пишите в любой канал ниже. Отвечаю в течение дня.</p>
+    </div>
+
+    <div class="card" id="contact">
+      <div class="contact-grid" style="margin-top:0;">
+        <a href="max.html" class="contact-btn primary">
+          <span class="contact-btn-label">Написать в</span>
+          <span class="contact-btn-value">MAX →</span>
+        </a>
+        <a href="tg.html" class="contact-btn">
+          <span class="contact-btn-label">Написать в</span>
+          <span class="contact-btn-value">Telegram →</span>
+        </a>
+      </div>
+      <a href="mailto:al.litau@mail.ru" class="email-link">
+        <span class="email-link-label">Email</span>
+        <span class="email-link-value">al.litau@mail.ru →</span>
+      </a>
+      <div class="email-link">
+        <span class="email-link-label">Мой ник в соцсетях</span>
+        <span class="email-link-value">@alexander_litau</span>
+      </div>
+    </div>
+
+    <div class="card card-tight">
+      <div class="info-row">
+        <span class="info-row-icon">🌍</span>
+        <span class="info-row-text">Иркутск · GMT+8</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">🕘</span>
+        <span class="info-row-text">Будни 9:00–19:00</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">✈️</span>
+        <span class="info-row-text">Выезжаю по России и за рубеж</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      © Александр Литау · <strong>Иркутск</strong>
+    </div>
+
+  </div>
+
+</div>
+
+<dialog class="dali-viewer" id="daliViewer" aria-label="Фото автомобиля">
+  <img id="daliViewerImage" alt="">
+  <button type="button" onclick="document.getElementById('daliViewer').close()">Закрыть ×</button>
+</dialog>
+<!-- ===== TAB BAR SHELF ===== -->
+<div class="tab-bar-shelf"></div>
+
+<!-- ===== TAB BAR ===== -->
+<nav class="tab-bar">
+  <button class="tab-item active" data-page="pageHome" onclick="switchTab(this)">
+    <div class="tab-icon">🏠</div>
+    <div class="tab-label">Главная</div>
+  </button>
+  <button class="tab-item" data-page="pageBroadcast" onclick="switchTab(this)">
+    <div class="tab-icon">📺</div>
+    <div class="tab-label">В эфире</div>
+  </button>
+  <button class="tab-item" data-page="pageStage" onclick="switchTab(this)">
+    <div class="tab-icon">🎤</div>
+    <div class="tab-label">Сцена</div>
+  </button>
+  <button class="tab-item" data-page="pageAgency" onclick="switchTab(this)">
+    <div class="tab-icon">🚘</div>
+    <div class="tab-label">Мой бизнес</div>
+  </button>
+  <button class="tab-item" data-page="pageContacts" onclick="switchTab(this)">
+    <div class="tab-icon">📬</div>
+    <div class="tab-label">Контакты</div>
+  </button>
+</nav>
+
+<script>
+function selectDaliPhoto(button, index) {
+  const source = button.querySelector('img');
+  const selected = document.getElementById('daliSelectedPhoto');
+  selected.src = source.src;
+  selected.alt = source.alt;
+  document.getElementById('daliPhotoCaption').textContent = source.alt;
+  document.getElementById('daliPhotoCount').textContent = String(index).padStart(2, '0') + ' / 04';
+  document.querySelectorAll('.dali-thumb').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+}
+function openDaliPhoto(button) {
+  const photo = button.querySelector('img');
+  const viewer = document.getElementById('daliViewer');
+  const image = document.getElementById('daliViewerImage');
+  image.src = photo.src;
+  image.alt = photo.alt;
+  viewer.showModal();
+}
+document.getElementById('daliViewer').addEventListener('click', function(event) {
+  if (event.target === this) this.close();
+});
+const MAX_USERNAME = 'u/f9LHodD0cOJjpA8IcT8R5DX13-0VsNHW-4ulnpIjGedGegtriCUrdGrIveo';
+const TG_USERNAME = 'alexander_litau';
+
+function haptic(type) {
+  try {
+    if (window.WebApp && window.WebApp.HapticFeedback) {
+      if (type === 'select') window.WebApp.HapticFeedback.selectionChanged();
+      else window.WebApp.HapticFeedback.impactOccurred(type || 'light');
+    } else if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+      const h = window.Telegram.WebApp.HapticFeedback;
+      if (type === 'select') h.selectionChanged();
+      else h.impactOccurred(type || 'light');
+    }
+  } catch (e) {}
+}
+
+function switchTab(el) {
+  haptic('select');
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const pageId = el.getAttribute('data-page');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchTabByName(pageId) {
+  const btn = document.querySelector('.tab-item[data-page="' + pageId + '"]');
+  if (btn) switchTab(btn);
+}
+
+function openMax() {
+  haptic('medium');
+  const url = 'https://max.ru/' + MAX_USERNAME;
+  try {
+    // Внутри приложения MAX (platform != null) — используем нативный API
+    if (window.WebApp && window.WebApp.platform) {
+      if (window.WebApp.openMaxLink) { window.WebApp.openMaxLink(url); return; }
+      if (window.WebApp.openLink) { window.WebApp.openLink(url); return; }
+    }
+  } catch (e) {}
+  // В браузере — открываем как обычную ссылку
+  window.open(url, '_blank');
+}
+
+// Проверка: реально внутри Mini App (initData есть только в настоящем контексте)
+function isInMaxApp() {
+  return !!(window.WebApp && window.WebApp.platform && window.WebApp.initData);
+}
+function isInTelegramApp() {
+  return !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.platform && window.Telegram.WebApp.initData);
+}
+
+// Универсальный обработчик для контактных кнопок: MAX, Telegram (Safari, MAX, Telegram)
+function handleContactLink(event, url) {
+  haptic('medium');
+  // Всегда отменяем дефолтное поведение — навигируем сами
+  event.preventDefault();
+
+  // Внутри MAX-приложения
+  if (isInMaxApp()) {
+    if (window.WebApp.openMaxLink) { window.WebApp.openMaxLink(url); return false; }
+    if (window.WebApp.openLink) { window.WebApp.openLink(url); return false; }
+  }
+  // Внутри Telegram-приложения
+  if (isInTelegramApp()) {
+    if (/^https?:\/\/t\.me\//.test(url) && window.Telegram.WebApp.openTelegramLink) {
+      window.Telegram.WebApp.openTelegramLink(url);
+      return false;
+    }
+    if (window.Telegram.WebApp.openLink) { window.Telegram.WebApp.openLink(url); return false; }
+  }
+  // Браузер (iOS Safari особенно): пробуем мета-refresh — переписываем head
+  try {
+    const meta = document.createElement('meta');
+    meta.httpEquiv = 'refresh';
+    meta.content = '0; url=' + url;
+    document.head.appendChild(meta);
+  } catch (e) {
+    window.location.href = url;
+  }
+  return false;
+}
+
+// Универсальный обработчик для max.ru ссылок на <a> элементах
+function openMaxUrl(event, url) {
+  haptic('medium');
+  try {
+    if (isInMaxApp()) {
+      event.preventDefault();
+      if (window.WebApp.openMaxLink) { window.WebApp.openMaxLink(url); return false; }
+      if (window.WebApp.openLink) { window.WebApp.openLink(url); return false; }
+    }
+  } catch (e) {}
+  return true; // В браузере — пусть href сработает естественно
+}
+
+// Универсальный обработчик для t.me ссылок на <a> элементах
+function openTelegramUrl(event, url) {
+  haptic('medium');
+  try {
+    if (isInTelegramApp() && window.Telegram.WebApp.openTelegramLink) {
+      event.preventDefault();
+      window.Telegram.WebApp.openTelegramLink(url);
+      return false;
+    }
+    if (isInMaxApp() && window.WebApp.openLink) {
+      event.preventDefault();
+      window.WebApp.openLink(url);
+      return false;
+    }
+  } catch (e) {}
+  return true; // В браузере — пусть href сработает естественно
+}
+
+function openTelegram() {
+  haptic('medium');
+  const url = 'https://t.me/' + TG_USERNAME;
+  try {
+    // Внутри Telegram WebApp
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.platform && window.Telegram.WebApp.openTelegramLink) {
+      window.Telegram.WebApp.openTelegramLink(url);
+      return;
+    }
+    // Внутри MAX — открываем через openLink
+    if (window.WebApp && window.WebApp.platform && window.WebApp.openLink) {
+      window.WebApp.openLink(url);
+      return;
+    }
+  } catch (e) {}
+  // В браузере
+  window.open(url, '_blank');
+}
+
+// Init Telegram/MAX WebApp
+(function init() {
+  try {
+    const wa = window.WebApp || (window.Telegram && window.Telegram.WebApp);
+    if (wa) {
+      wa.ready && wa.ready();
+      wa.expand && wa.expand();
+    }
+  } catch (e) {}
+})();
+
+// Глобальный перехватчик кликов по ссылкам — внутри MAX/Telegram открываем через нативный API.
+// В обычном браузере (Safari, Chrome) не вмешиваемся — <a href> работает естественно.
+document.addEventListener('click', function (e) {
+  try {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.href;
+    if (!href) return;
+
+    // Внутри MAX-приложения: перехватываем max.ru и t.me ссылки
+    if (isInMaxApp()) {
+      if (/^https?:\/\/max\.ru\//.test(href)) {
+        e.preventDefault();
+        haptic('medium');
+        if (window.WebApp.openMaxLink) window.WebApp.openMaxLink(href);
+        else if (window.WebApp.openLink) window.WebApp.openLink(href);
+        return;
+      }
+      if (/^https?:\/\/t\.me\//.test(href)) {
+        e.preventDefault();
+        haptic('medium');
+        if (window.WebApp.openLink) window.WebApp.openLink(href);
+        return;
+      }
+    }
+    // Внутри Telegram-приложения
+    if (isInTelegramApp()) {
+      if (/^https?:\/\/t\.me\//.test(href) && window.Telegram.WebApp.openTelegramLink) {
+        e.preventDefault();
+        haptic('medium');
+        window.Telegram.WebApp.openTelegramLink(href);
+        return;
+      }
+    }
+  } catch (err) {}
+});
+</script>
+
+</body>
+</html>
